@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  # LogSage Backend
+  backend:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile
+    container_name: logsage-backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      - ./frontend:/frontend
+    environment:
+      # Point to your existing Elasticsearch instance
+      # Use host.docker.internal to reach localhost on Windows/Mac
+      - ELASTICSEARCH_HOST=host.docker.internal 
+      - ELASTICSEARCH_PORT=9200
+      - ES_INDEX_PATTERN=${ES_INDEX_PATTERN:-*}
+      - LLM_API_KEY=${LLM_API_KEY}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

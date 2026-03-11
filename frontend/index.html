@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogSage Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-wrapper">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo-container">
+                <img src="assets/logo/logo.svg" alt="LogSage Logo" class="logo-img">
+                <span class="logo-text">LogSage</span>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item active" data-tab="dashboard">
+                    <span class="icon">📊</span> Dashboard
+                </li>
+                <li class="nav-item" data-tab="logs">
+                    <span class="icon">📝</span> Live Logs
+                </li>
+                <li class="nav-item" data-tab="analysis">
+                    <span class="icon">🤖</span> AI Analyst
+                </li>
+            </ul>
+            <div class="status-indicator">
+                <span class="status-dot"></span> System Online
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <section id="dashboard" class="tab-content active">
+                <header class="tab-header">
+                    <h2>System Overview</h2>
+                </header>
+                <div class="dashboard-grid">
+                    <div class="card stat-card">
+                        <h3>Total Logs</h3>
+                        <p class="stat-value" id="total-logs">0</p>
+                    </div>
+                    <div class="card stat-card">
+                        <h3>Anomalies Detected</h3>
+                        <p class="stat-value warning" id="anomaly-count">0</p>
+                    </div>
+                    <div class="card stat-card">
+                        <h3>Services Active</h3>
+                        <p class="stat-value" id="active-services">0</p>
+                    </div>
+                    <div class="card chart-card full-width">
+                        <h3>Log Volume Over Time</h3>
+                        <div class="chart-container">
+                            <canvas id="logChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card anomalies-card full-width">
+                        <h3>Recent Anomalies</h3>
+                        <div class="anomaly-list" id="anomaly-list">
+                            <div class="empty-state">No anomalies detected.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Logs Tab -->
+            <section id="logs" class="tab-content">
+                <header class="tab-header">
+                    <h2>Live Log Stream</h2>
+                    <button id="simulate-btn" class="btn-primary">Simulate Traffic</button>
+                </header>
+                <div class="card logs-card full-height">
+                    <div class="log-list" id="log-list">
+                        <div class="empty-state">Waiting for logs...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Analyst Tab -->
+            <section id="analysis" class="tab-content">
+                <header class="tab-header">
+                    <h2>AI Log Analyst</h2>
+                </header>
+                <div class="analysis-grid">
+                    <div class="card chat-card">
+                        <div class="chat-content">
+                            <div class="chat-box" id="chat-box">
+                                <div class="chat-message system">Hello! I'm your LogSage AI assistant. Ask me anything
+                                    about your logs (e.g., "Show me errors from the last hour").</div>
+                            </div>
+                            <div class="chat-input-area">
+                                <input type="text" id="chat-input" placeholder="Type your query..." />
+                                <button id="chat-btn" class="btn-primary">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card results-card">
+                        <h3>Analysis Results</h3>
+                        <div id="query-results" class="query-results-container">
+                            <div class="empty-state">Ask a question to see results here.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
