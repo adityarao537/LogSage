@@ -1,0 +1,55 @@
+# ============================================================================
+# LogSage Python Dependencies
+# Python Version: 3.9+ (see Dockerfile)
+# Elasticsearch Server Version: 7.8.0 (see deployment environment)
+# Last Validated: 2026-01-23
+# ============================================================================
+
+# Core Web Framework
+# ----------------------------------------------------------------------------
+flask==2.3.3                # Web framework - 2.3.x is stable with Python 3.9+
+flask-cors==4.0.0           # CORS support - latest stable version
+gunicorn==21.2.0            # WSGI server - production-grade, well-tested
+
+# HTTP Client
+# ----------------------------------------------------------------------------
+requests==2.31.0            # HTTP library - widely used, stable version
+
+# Data Science & ML Stack
+# ----------------------------------------------------------------------------
+# CRITICAL: NumPy must be <2.0 for Elasticsearch 7.10.1 compatibility
+# Elasticsearch 7.10.1 uses np.float_ which was removed in NumPy 2.0
+numpy==1.24.3               # Last stable 1.x version, compatible with all deps
+
+# Pandas version chosen for NumPy 1.24.x compatibility
+pandas==2.0.3               # Data manipulation - compatible with numpy 1.24.x
+
+# Scikit-learn version tested with numpy 1.24.3
+scikit-learn==1.3.0         # Machine learning - IsolationForest for anomaly detection
+
+# Elasticsearch Client
+# ----------------------------------------------------------------------------
+# CRITICAL: Must match Elasticsearch server major version
+# Server: 7.8.0 → Client: 7.x.x
+# Use 7.10.1 (latest 7.x client) for best compatibility
+elasticsearch==7.10.1       # ES client - matched to ES 7.8.0 server version
+
+# AI/LLM Integration
+# ----------------------------------------------------------------------------
+# CRITICAL: httpx must be <0.25 for OpenAI 1.3.0 compatibility
+# httpx 0.28.x has breaking changes in proxies argument handling
+httpx<0.25                  # HTTP client - compatible with OpenAI 1.3.0
+
+# OpenAI client - pinned to avoid breaking changes in 1.x series
+# Note: 1.12.0 has httpx compatibility issues in Python 3.9, using 1.3.0
+openai==1.3.0               # OpenAI API client - stable version compatible with Python 3.9
+
+# ============================================================================
+# ELASTICSEARCH VERSION COMPATIBILITY QUICK REFERENCE
+# ============================================================================
+# For Elasticsearch 6.x (6.8.x): Use elasticsearch==6.8.2, numpy<1.24
+# For Elasticsearch 7.x (7.8.0): Use elasticsearch==7.10.1, numpy<2.0 (CURRENT)
+# For Elasticsearch 8.x (8.x.x): Use elasticsearch==8.12.0, numpy>=1.23
+#
+# See DEPENDENCY_MANAGEMENT.md for full version matrix and upgrade guides
+# ============================================================================
